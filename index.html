@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html ng-app="root" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<title>untitled</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<script src="angular.min.js"></script>
+	<script src="root.js"></script>
+</head>
+
+<body>
+
+<div ng-controller="index">
+  <table>
+	  <thead>
+		  <tr>
+			  <td>Id</td>
+			  <td>Name</td>
+		  </tr>
+	  </thead>
+	  <tbody>
+		  <tr ng-repeat="bus in buses">
+			  <td>{{bus.id}}</td>
+			  <td>{{bus.name}}</td>
+		  </tr>
+	  </tbody>
+  </table>
+</div>
+	
+</body>
+
+</html>
+
+
