@@ -2,7 +2,7 @@ var now_ones = [];
 angular.module('root', [])
 	.controller('onelist', ['$scope', function($scope) {
 		$scope.$watch("location", function (newValue) {
-			$scope.ones = filter_by_location(now_ones, newValue);
+			$scope.ones = filter_by_location(now_ones, newValue)
 		});
 		now_ones = filter_by_time(ones, moment().hour()*60 + moment().minute(), moment().isoWeekday()-1)
 		$scope.ones = now_ones;

@@ -60,7 +60,7 @@ window.mtry_to_hour = (x) ->
 		m = parseInt(x.split(':')[1])
 		return h*60 + m
 window.hour_to_mtry = (x) ->
-	div = Math.floor(x/60)
+	div = Math.floor(x/60) % 24
 	rem = x % 60
 	if rem < 10
 		return div + ':0' + rem
@@ -127,7 +127,7 @@ ones_sortfunc = (a, b) ->
 window.ones.sort(ones_sortfunc)
 
 window.filter_by_location = (ones, loc) ->
-	if loc then (one for one in ones when one.name.toLowerCase().indexOf(loc) != -1) else ones
+	if loc then (one for one in ones when one.name.toLowerCase().indexOf(loc.toLowerCase()) != -1) else ones
 
 window.filter_by_time = (ones, t, d) ->
 	(one for one in ones when (one.h_depart_time >= t) and (d in one.day_range))

@@ -37,7 +37,7 @@ window.mtry_to_hour = function(x) {
 
 window.hour_to_mtry = function(x) {
   var div, rem;
-  div = Math.floor(x / 60);
+  div = Math.floor(x / 60) % 24;
   rem = x % 60;
   if (rem < 10) {
     return div + ':0' + rem;
@@ -181,7 +181,7 @@ window.filter_by_location = function(ones, loc) {
     _results = [];
     for (_j = 0, _len1 = ones.length; _j < _len1; _j++) {
       one = ones[_j];
-      if (one.name.toLowerCase().indexOf(loc) !== -1) {
+      if (one.name.toLowerCase().indexOf(loc.toLowerCase()) !== -1) {
         _results.push(one);
       }
     }
