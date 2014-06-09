@@ -1,3 +1,5 @@
+aliases = [];
+stops = [];
 var occt = """
 #WS Westside
 #LRS Leroy Southside
@@ -13,7 +15,7 @@ var occt = """
 			13:20-24 0:20
 		`LRS
 			8:20-16:20 2:0
-			18-14 1:0
+			18-24 1:0
 		`OAK
 			15-22 1:0
 		`RRT
@@ -25,8 +27,6 @@ var occt = """
 	*M-R
 		`OAK
 			23
-		`RRT
-			23:30-22
 		`RES
 			24:15
 	*F
