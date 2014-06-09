@@ -83,6 +83,13 @@ ones_parsed = (ln, bus_alias, day_range) ->
 		time_range = [mtry_to_hour(hour_range)]
 	return ({t: x, bus: bus_alias, day_range: day_range} for x in time_range)
 
+dayrange_parsed = (s) ->
+	days = ['M','T','W','R','F','S','U']
+	[a, b] = s.split('-')
+	a = days.indexOf(a);
+	b = days.indexOf(b);
+	return if b >= 0 then [a..b] else [a]
+
 parsed = (s, aliases, stops) ->
 	cstop = null
 	cbus = ''
@@ -97,7 +104,7 @@ parsed = (s, aliases, stops) ->
 					cstop = stop_parsed(ln)
 					stops.push(cstop)
 				when '*'
-					cdayrange = tail(ln)
+					cdayrange = dayrange_parsed(tail(ln))
 				when '`'
 					cbus = tail(ln)
 				else
@@ -122,5 +129,5 @@ window.ones.sort(ones_sortfunc)
 window.filter_by_location = (ones, loc) ->
 	if loc then (one for one in ones when one.name.toLowerCase().indexOf(loc) != -1) else ones
 
-window.filter_by_time = (ones, t) ->
-	(one for one in ones when one.h_depart_time >= t)
+window.filter_by_time = (ones, t, d) ->
+	(one for one in ones when (one.h_depart_time >= t) and (d in one.day_range))
