@@ -1,23 +1,19 @@
-var now_ones = [];
-angular.module('root', [])
-	.controller('onelist', ['$scope', function($scope) {
-		$scope.$watch("location", function (newValue) {
-			$scope.ones = filter_by_location(now_ones, newValue)
-		});
-		now_ones = filter_by_time(ones, moment().hour()*60 + moment().minute(), moment().isoWeekday()-1)
-		$scope.ones = now_ones;
-}])
-	.directive('now', function($interval) {
-		return function(scope, element, attrs) {
-			var format, stopTime;
+angular.module('root', ['schedules'])
+	.controller('timetable', ['$scope', '$interval','$http', 'aliasesParser', 'scheduleParser', 
+		function($scope, $interval, $http, aliasesParser, scheduleParser) {
+			$scope.stopNames = $scope.aliases = $scope.ones = [];
+			$scope.now = moment();
+			$http.get('aliases.json').success(function(data){
+				$scope.aliases = aliasesParser(data);
+			});
+			$http({method: 'GET', url: 'schedules.json', cache: true}).success(function(data){
+				$scope.stopNames = Object.keys(data);
+				$scope.ones = scheduleParser(data);
+			});
 			function updateTime() {
-          		element.text(moment().format("dddd, MMMM Do, h:mm:ss a"));
-          		now_ones = filter_by_time(ones, moment().hour()*60 + moment().minute(), moment().isoWeekday()-1)
-        	}
-        	updateTime();
-        	stopTime = $interval(updateTime, 1000);
-        	element.on('$destroy', function() {
-        		$interval.cancel(stopTime);
-        	});
-        };
-});
+				newtime = moment();
+				if (newtime.isAfter($scope.now, 'minute'))
+					$scope.now = moment();
+			}
+			stopTime = $interval(updateTime, 1000);
+}]);

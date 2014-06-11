@@ -3,52 +3,63 @@
 <html ng-app="root" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
-	<title>untitled</title>
+	<title>Bear Cat Bus</title>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-	<link href="select2-3.4.8/select2.css" rel="stylesheet"/>
-	<script src="select2-3.4.8/select2.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js"></script>
+    <script src="lib/moment-recur.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.11/require.js"></script>
+    <link href="lib/select2-3.4.8/select2.css" rel="stylesheet"/>
+	<script src="lib/select2-3.4.8/select2.js"></script>
 	<script>
-        $(document).ready(function() { $("#e1").select2({
-        	placeholder: "Where are you?",
-        	allowClear: true
-        }); });
+        $(document).ready(function() { 
+        	$("#location-select").select2({
+        		placeholder: "Where are you?",
+        		allowClear: true
+        	}); 
+        	$("#bus-select").select2({
+        		placeholder: "Filter by bus",
+        		allowClear: true
+        	});
+        });
     </script>
-	<script src="angular.min.js"></script>
-	<script src="moment.min.js"></script>
-	<script src="parser.js"></script>
+	<script src="schedules.js"></script>
 	<script src="root.js"></script>
 </head>
 
 <body>
-<p now="format">Loading...</p>
-<p>	
-	<select ng-model="location" name="e1" id="e1" style="width:300px" class="populate select2-offscreen" tabindex="-1">
-		<option></option> 
-		<optgroup label="On Campus">
-			<option value="University Union">University Union</option>
-			<option value="Mohawk/Dickinson">Mohawk/Dickinson</option>
-		</optgroup>
-	</select>
-</p>
-<div ng-controller="onelist">
-  <table>
-	  <thead>
-		  <tr>
-			  <td>Bus ....</td>
-			  <td>Leaving from ............</td>
-			  <td>Departing at</td>
-		  </tr>
-	  </thead>
-	  <tbody>
-		  <tr ng-repeat="one in ones">
-			  <td>{{one.id}}</td>
-			  <td>{{one.name}}</td>
-			  <td>{{one.depart_time}}</td>
-		  </tr>
-	  </tbody>
-  </table>
+
+<div ng-controller="timetable">
+	<p>It's now: {{now.format("dddd, MMMM Do, h:mm:ss a")}}</p>
+	<p>	
+		<select ng-model="selectedLoc" ng-options="stopName for stopName in stopNames" name="location-select" id="location-select" style="width:300px" class="populate select2-offscreen" tabindex="-1">
+			<option></option>
+		</select>
+		<select ng-model="selectedBus" ng-options="alias.fullname for alias in aliases" name="bus-select" id="bus-select" style="width:300px" class="populate select2-offscreen" tabindex="-1">
+			<option></option> 
+		</select>
+	</p>
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<td>Bus ....</td>
+					<td>Leaving from ............</td>
+					<td>Departing at</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="one in ones | oneFilter:now:selectedLoc:selectedBus">
+					<td>{{one.busCode.toUpperCase()}}</td>
+					<td>{{one.stopName}}</td>
+					<td>{{one.departTime.format("h:mmA")}}</td>
+					<td>{{one.strDayRange}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </div>
 	
 </body>
