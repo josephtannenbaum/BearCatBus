@@ -1,11 +1,10 @@
 {
 	"WS": "Westside",
-	"LRS": "Leroy Southside",
-	"OAK": "Oakdale Mall",
-	"RRT": "Riviera Ridge",
-	"RES": "Residential Shuttle",
 	"DCR": "Downtown Center",
+	"LRS": "Leroy Southside",
+	"RES": "Residential Shuttle",
+	"RRT": "Riviera Ridge",
+	"OAK": "Oakdale Mall",
 	"ITC": "ITC Shuttle",
-	"UP": "University Plaza",
-	"TC": "Triple Cities"
+	"UP": "University Plaza"
 }

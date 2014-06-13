@@ -3,28 +3,23 @@
 <html ng-app="root" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
-	<title>Bear Cat Bus</title>
+	<title>BearCatBus: realtime SUNY Binghamton bus schedule</title>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta property="og:title" content="BearCatBus: realtime SUNY Binghamton bus schedule" />
+    <meta property="og:description" content="by Joe Tannenbaum" />
+    <meta property="og:image" content="//tannenbau.me/bcb/preview.png" />
+
+	<link href="index.css" rel="stylesheet"/>
+
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="lib/jquery.leanModal.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js"></script>
     <script src="lib/moment-recur.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.11/require.js"></script>
     <link href="lib/select2-3.4.8/select2.css" rel="stylesheet"/>
 	<script src="lib/select2-3.4.8/select2.js"></script>
-	<script>
-        $(document).ready(function() { 
-        	$("#location-select").select2({
-        		placeholder: "Where are you?",
-        		allowClear: true
-        	}); 
-        	$("#bus-select").select2({
-        		placeholder: "Filter by bus",
-        		allowClear: true
-        	});
-        });
-    </script>
+	<script src="lib/angular-ui/select2.js"></script>
 	<script src="schedules.js"></script>
 	<script src="root.js"></script>
 </head>
@@ -32,36 +27,63 @@
 <body>
 
 <div ng-controller="timetable">
-	<p>It's now: {{now.format("dddd, MMMM Do, h:mm:ss a")}}</p>
+	<p>
+		<span class="timedisplay">
+			It's now: {{now.format("dddd, MMMM Do, h:mm:ss a")}}
+		</span>
+		<span class="aboutButton">
+			<button class="button" id="aboutButton" href="#aboutWindow">
+				About
+			</button>
+		</span>
+	</p>
 	<p>	
-		<select ng-model="selectedLoc" ng-options="stopName for stopName in stopNames" name="location-select" id="location-select" style="width:300px" class="populate select2-offscreen" tabindex="-1">
-			<option></option>
-		</select>
-		<select ng-model="selectedBus" ng-options="alias.fullname for alias in aliases" name="bus-select" id="bus-select" style="width:300px" class="populate select2-offscreen" tabindex="-1">
-			<option></option> 
-		</select>
+		<span class="selectedLocContainer">
+			<select ui-select2 ng-model="selectedLoc" data-placeholder="Where are you?" style="width:250px" >
+				<option value=""></option>
+				<option ng-repeat="stopName in stopNames" value="{{stopName}}">{{stopName}}</option>
+			</select>
+		</span>
+		<span class="selectedBusContainer">
+			<select ui-select2 ng-model="selectedBus" data-placeholder="Filter by bus" style="width:250px" > 
+				<option value=""></option>
+				<option ng-repeat="alias in aliases" value="{{alias.busCode.toLowerCase()}}">{{alias.fullname}}</option>
+			</select>
+		</span>
+		<span class="saveDefaultButton">
+			<button ng-click="saveDefault()" class="button" id="saveDefault">
+				Save as default
+			</button>
+		</span>
 	</p>
 	<div>
-		<table>
+		<p>{{msg.s}}</p>
+		<table class="timetable">
 			<thead>
 				<tr>
-					<td>Bus ....</td>
-					<td>Leaving from ............</td>
+					<td>Bus</td>
+					<td>Leaving from</td>
 					<td>Departing at</td>
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="one in ones | oneFilter:now:selectedLoc:selectedBus">
-					<td>{{one.busCode.toUpperCase()}}</td>
-					<td>{{one.stopName}}</td>
-					<td>{{one.departTime.format("h:mmA")}}</td>
-					<td>{{one.strDayRange}}</td>
+				<tr class="departure" ng-repeat="one in ones | oneFilter:selectedLoc:selectedBus:msg">
+					<td ng-click="selectedBus(this.one.busCode)">{{one.busCode.toUpperCase()}}</td>
+					<td ng-click="selectStop(this.one.stopName)">{{one.stopName}}</td>
+					<td>{{one.strDepartTime}}</td>	
+					<td ng-show="impendingDeparture({{this.one.departTime}})">Leaving shortly!</td>	
 				</tr>
 			</tbody>
 		</table>
 	</div>
 </div>
-	
+<div id="aboutWindow">
+	<p>A webapp by <a href="http://tannenbau.me">Joe Tannenbaum</a></p>
+	<p>Open source on <a href="https://github.com/josephtannenbaum/BearCatBus">GitHub</a></p>
+	<p>Send bug reports to joseph.i.tannenbaum gmail</p>
+	<p>NOTE: The creator does not guarantee the accuracy of the information on this website. This website is not associated with OCC Transport.</p>
+</div>
+
 </body>
 
 </html>

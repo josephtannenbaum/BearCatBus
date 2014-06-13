@@ -2,56 +2,283 @@
   "University Union": {
     "m-f": {
       "ws": [
-        "7-13 0:30",
-        "13:20-24 0:20"
+        "7-22 1:0"
+      ],
+      "dcr": [
+        "7:30-22:30 1:0"
       ],
       "lrs": [
-        "8:20-16:20 2:0",
-        "18-24 1:0"
+        "16:30-22:30 1:0"
       ],
-      "oak": [
-        "15-22 1:0"
+      "res": [
+        "7:15-22:45 0:30"
       ],
       "rrt": [
-        "15:30-22:30 1:0"
-      ],
-      "res": [
-        "7:15-23:45 0:30"
-      ], 	
-      "dcr": [
-        "7:15-23:45 0:30"
+        "18-22 1:0"
       ]
     },
-    "m-r": {
+    "s-u": {
+      "ws": [
+        "10-20 2:0"
+      ],
+      "dcr": [
+        "12:30-21:30 1:0"
+      ],
+      "lrs": [
+        "11-21 2:0"
+      ],
+      "rrt": [
+        "12-20 2:0"
+      ],
       "oak": [
-        "23"
-      ],
-      "res": [
-        "24:15"
-      ]
-    },
-    "f": {
-      "dcr": [
-        "24:15"
+        "13-21 2:0"
       ]
     }
   },
   "Mohawk/Dickinson": {
     "m-f": {
-      "tc": [
-        "7:15-12:45 0:30"
-      ],
       "up": [
-        "7-21:30 0:30"
+        "7-17 1:0",
+        "18:15-22:15 1:0"
       ],
       "itc": [
-        "7:20-22:00 0:20"
+        "8-17:40 0:20"
       ]
     },
-    "m-r": {
+    "s-u": {
+      "cs": [
+        "10:45-21:45 1:0"
+      ]
+    }
+  },
+  "Floral & Main": {
+    "m-f": {
+      "ws": [
+        "+0:10 University Union"
+      ],
+      "lrs": [
+        "+0:12 University Union"
+      ]
+    },
+    "s-u": {
+      "ws": [
+        "+0:10 University Union"
+      ],
+      "lrs": [
+        "+0:12 University Union"
+      ]
+    }
+  },
+  "Main & Murray": {
+    "m-f": {
+      "ws": [
+        "+0:15 University Union"
+      ]
+    },
+    "s-u": {
+      "ws": [
+        "+0:15 University Union"
+      ]
+    }
+  },
+  "Downtown Center": {
+    "m-f": {
+      "ws": [
+        "+0:20 University Union"
+      ],
+      "dcr": [
+        "+0:11 University Union"
+      ]
+    },
+    "s-u": {
+      "ws": [
+        "+0:20 University Union"
+      ],
+      "dcr": [
+        "+0:11 University Union"
+      ]
+    }
+  },
+  "Riverside & Front": {
+    "m-f": {
+      "dcr": [
+        "+0:13 University Union"
+      ]
+    },
+    "s-u": {
+      "dcr": [
+        "+0:13 University Union"
+      ]
+    }
+  },
+  "Riverside & Margaret": {
+    "m-f": {
+      "dcr": [
+        "+0:17 University Union"
+      ]
+    },
+    "s-u": {
+      "dcr": [
+        "+0:17 University Union"
+      ]
+    }
+  },
+  "Leroy & Murray": {
+    "m-f": {
+      "lrs": [
+        "+0:18 University Union"
+      ]
+    },
+    "s-u": {
+      "lrs": [
+        "+0:18 University Union"
+      ]
+    }
+  },
+  "Tompkins & Conklin": {
+    "m-f": {
+      "lrs": [
+        "+0:28 University Union"
+      ]
+    },
+    "s-u": {
+      "lrs": [
+        "+0:28 University Union"
+      ]
+    }
+  },
+  "Susquehanna": {
+    "m-f": {
+      "res": [
+        "+0:04 University Union"
+      ]
+    }
+  },
+  "Hillside": {
+    "m-f": {
+      "res": [
+        "+0:06 University Union"
+      ]
+    },
+    "s-u": {
+      "cs": [
+        "+0:07 Mohawk/Dickinson"
+      ]
+    }
+  },
+  "Mountainview": {
+    "m-f": {
+      "res": [
+        "+0:09 University Union"
+      ]
+    },
+    "s-u": {
+      "cs": [
+        "+0:09 Mohawk/Dickinson"
+      ]
+    }
+  },
+  "Riviera Ridge": {
+    "m-f": {
+      "rrt": [
+        "+0:07 University Union"
+      ]
+    },
+    "s-u": {
+      "rrt": [
+        "+0:07 University Union"
+      ]
+    }
+  },
+  "Parkway Plaza": {
+    "m-f": {
+      "rrt": [
+        "+0:10 University Union"
+      ]
+    },
+    "s-u": {
+      "rrt": [
+        "+0:10 University Union"
+      ]
+    }
+  },
+  "Walmart (TSM)": {
+    "m-f": {
+      "rrt": [
+        "+0:14 University Union"
+      ]
+    },
+    "s-u": {
+      "rrt": [
+        "+0:14 University Union"
+      ]
+    }
+  },
+  "University Plaza": {
+    "m-f": {
       "up": [
-        "24",
-        "24:30"
+        "+0:05 Mohawk/Dickinson"
+      ]
+    }
+  },
+  "Hayes & Meadows": {
+    "m-f": {
+      "up": [
+        "+0:07 Mohawk/Dickinson"
+      ]
+    }
+  },
+  "Oxford Rd & Plaza Dr": {
+    "m-f": {
+      "up": [
+        "+0:08 Mohawk/Dickinson"
+      ]
+    }
+  },
+  "ITC": {
+    "m-f": {
+      "itc": [
+        "+0:05 Mohawk/Dickinson"
+      ]
+    }
+  },
+  "West Gym": {
+    "m-f": {
+      "itc": [
+        "+0:10 Mohawk/Dickinson"
+      ]
+    },
+    "s-u": {
+      "cs": [
+        "+0:03 Mohawk/Dickinson"
+      ]
+    }
+  },
+  "Academic A": {
+    "m-f": {
+      "itc": [
+        "+0:12 Mohawk/Dickinson"
+      ]
+    }
+  },
+  "Denny's": {
+    "s-u": {
+      "oak": [
+        "+0:03 University Union"
+      ]
+    }
+  },
+  "Oakdale Mall": {
+    "s-u": {
+      "oak": [
+        "+0:10 University Union"
+      ]
+    }
+  },
+  "Wegmans": {
+    "s-u": {
+      "oak": [
+        "+0:15 University Union"
       ]
     }
   }

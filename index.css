@@ -1,0 +1,100 @@
+body {
+	background-color: #A2D7F2;
+	color:#333333;
+}
+
+.select2-results {
+	max-height: 500px !important;
+}
+
+.button {
+    background: #777;
+    background-color: #A2D7F2;
+	border: 1px none;
+	border-style: solid;
+	border-color: #999999;
+    color:#333333;
+    cursor: pointer;
+    display: inline;
+    padding: 5px 10px;
+}
+.button:hover {
+    background-position: 0 -48px;
+    }
+.button:active {
+    background-position: 0 top;
+    position: relative;
+    top: 1px;
+}
+
+.timedisplay {
+	color:#333333;
+	border-width: 1px;
+	border-color: #999999;
+	border-style: solid;
+	padding: 8px;
+	max-width: 33%;
+}
+
+.selectedBusContainer, .selectedLocContainer, .saveDefaultButton, .aboutButton {
+	margin-left: 13px;
+}
+
+table.timetable {
+	border-collapse: collapse;
+	border-color: #999999;
+	border-width: 1px;
+	color:#333333;
+	min-width: 500px;
+}
+table.timetable th {
+	border-color: #999999;
+	border-style: solid;
+	border-width: 1px;
+	padding: 8px;
+}
+table.timetable td {
+	border-color: #999999;
+	border-style: solid;
+	border-width: 1px;
+	padding: 8px;
+}
+
+table.timetable tr.departure td:hover {
+    background-color: #ffff99;
+}
+
+table.timetable tr.departure td a:hover, a:visited, a:link, a:active {
+    text-decoration: none !important;
+    color: #333333;
+    display:block;
+    width:100%;
+}
+
+#lean_overlay {
+    position: fixed;
+    z-index:100;
+    top: 0px;
+    left: 0px;
+    height:100%;
+    width:100%;
+    background: #000;
+    display: none;
+}
+
+#aboutWindow {
+	width: 404px;
+	padding: 18px 18px 14px 18px;
+	display: none;
+	background: #A2D7F2;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+#aboutWindow p {
+	font-size: 12px;
+}
+#aboutWindow p a{
+	text-decoration: underline !important;
+}
