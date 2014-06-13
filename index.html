@@ -39,13 +39,13 @@
 	</p>
 	<p>	
 		<span class="selectedLocContainer">
-			<select ui-select2 ng-model="selectedLoc" data-placeholder="Where are you?" style="width:250px" >
+			<select ui-select2 ng-model="t.selectedLoc" data-placeholder="Where are you?" style="width:250px" >
 				<option value=""></option>
 				<option ng-repeat="stopName in stopNames" value="{{stopName}}">{{stopName}}</option>
 			</select>
 		</span>
 		<span class="selectedBusContainer">
-			<select ui-select2 ng-model="selectedBus" data-placeholder="Filter by bus" style="width:250px" > 
+			<select ui-select2 ng-model="t.selectedBus" data-placeholder="Filter by bus" style="width:250px" > 
 				<option value=""></option>
 				<option ng-repeat="alias in aliases" value="{{alias.busCode.toLowerCase()}}">{{alias.busCode}} - {{alias.fullname}}</option>
 			</select>
@@ -71,10 +71,10 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr class="departure" ng-repeat="one in ones | oneFilter:selectedLoc:selectedBus:msg">
-					<td ng-click="selectBus(this.one.busCode)">{{one.busCode.toUpperCase()}}</td>
-					<td ng-click="selectStop(this.one.stopName)">{{one.stopName}}</td>
-					<td>{{one.strDepartTime}}</td>	
+				<tr class="departure" ng-repeat="one in ones | oneFilter:t.selectedLoc:t.selectedBus:msg">
+					<td ng-click="this.t.selectedBus = this.one.busCode">{{one.busCode.toUpperCase()}}</td>
+					<td ng-click="this.t.selectedLoc = this.one.stopName">{{one.stopName}}</td>
+					<td>{{one.strDepartTime}} ({{fromNow(one.strDepartTime)}})</td>	
 					<td>{{one.strDayRange.toUpperCase()}}</td>
 					<td ng-show="impendingDeparture({{this.one.departTime}})">Leaving shortly!</td>	
 				</tr>

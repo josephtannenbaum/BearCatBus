@@ -4,25 +4,16 @@ angular.module('root', ['schedules', 'ui.select2'])
 }])
 	.controller('timetable', ['$scope', '$interval', '$http', 'aliasesParser', 'scheduleParser', 'departTimeFilter',
 		function($scope, $interval, $http, aliasesParser, scheduleParser, departTimeFilter) {
-			
-
-			$scope.selectBus = function(bus) {
-				$scope.selectedBus = bus;
-			}
-			$scope.selectStop = function(stop) {
-				$scope.selectedLoc = stop;
-			}
+			$scope.t = {};
 
 			$scope.saveDefault = function() {
-				var data = {selectedBus: $scope.selectedBus,
-							selectedLoc: $scope.selectedLoc}
-				localStorage	.userService = angular.toJson(data)
+				var data = {selectedBus: $scope.t.selectedBus,
+							selectedLoc: $scope.t.selectedLoc}
+				localStorage.userService = angular.toJson(data)
 				$("#saveDefault").text("Saved!")
-				console.log("Saved default options")
 			}
 
-			$scope.stopNames = $scope.aliases = $scope.fullTimetable = [];
-			$scope.ones = [];
+			$scope.stopNames = $scope.aliases = $scope.fullTimetable = $scope.ones = [];
 			$scope.now = moment();
 			$scope.msg = {s: 'Loading timetable...'};
 			window.statusMessage = 'Loading bus schedule...';
@@ -42,9 +33,9 @@ angular.module('root', ['schedules', 'ui.select2'])
 			userDefaults = angular.fromJson(localStorage.userService);
 			if(userDefaults) {
 				if('selectedBus' in userDefaults)
-					$scope.selectedBus = userDefaults.selectedBus;
+					$scope.t.selectedBus = userDefaults.selectedBus;
 				if('selectedLoc' in userDefaults)
-					$scope.selectedLoc = userDefaults.selectedLoc;
+					$scope.t.selectedLoc = userDefaults.selectedLoc;
 			}
 
 			stopTime = $interval( function() {
@@ -61,11 +52,16 @@ angular.module('root', ['schedules', 'ui.select2'])
 				return departTime - ($scope.now.hours()*60 + $scope.now.minutes()) < 6;
 			}
 
+			$scope.fromNow = function(s) {
+				//console.log('get')
+				return moment(s,"h:mm A").fromNow()
+			}
+
 			resetSaveButton = function() {
 				$("#saveDefault").text("Save as default")
 			}
-			$scope.$watch('selectedBus', resetSaveButton);
-			$scope.$watch('selectedLoc', resetSaveButton);
+			$scope.$watch('t.selectedBus', resetSaveButton);
+			$scope.$watch('t.selectedLoc', resetSaveButton);
 }]);
 
 

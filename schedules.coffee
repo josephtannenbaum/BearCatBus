@@ -73,7 +73,7 @@ onesFilter = (ones=[], selectedLoc, selectedBus, msg) ->
 		byBus = (if selectedBus then busCodeFilter(selectedBus) else id)
 		ret = byLoc(byBus(ones))
 		msg.s = if ret.length == 0 then 'Nothing found!' else ''
-		ret[..20]	
+		ret[..25]	
 	else ones
 
 angular.module("schedules",[])
