@@ -25,7 +25,7 @@
 </head>
 
 <body>
-
+<p><b style="font-size:25px">BearCatBus</b> a realtime bus schedule for Binghamton University students </p>
 <div ng-controller="timetable">
 	<p>
 		<span class="timedisplay">
@@ -47,13 +47,16 @@
 		<span class="selectedBusContainer">
 			<select ui-select2 ng-model="selectedBus" data-placeholder="Filter by bus" style="width:250px" > 
 				<option value=""></option>
-				<option ng-repeat="alias in aliases" value="{{alias.busCode.toLowerCase()}}">{{alias.fullname}}</option>
+				<option ng-repeat="alias in aliases" value="{{alias.busCode.toLowerCase()}}">{{alias.busCode}} - {{alias.fullname}}</option>
 			</select>
 		</span>
 		<span class="saveDefaultButton">
 			<button ng-click="saveDefault()" class="button" id="saveDefault">
 				Save as default
 			</button>
+		</span>
+		<span>
+		<input type="checkbox" ng-model="showFullTimetable">Show full schedule</input>
 		</span>
 	</p>
 	<div>
@@ -64,13 +67,15 @@
 					<td>Bus</td>
 					<td>Leaving from</td>
 					<td>Departing at</td>
+					<td>Applicable days</td>
 				</tr>
 			</thead>
 			<tbody>
 				<tr class="departure" ng-repeat="one in ones | oneFilter:selectedLoc:selectedBus:msg">
-					<td ng-click="selectedBus(this.one.busCode)">{{one.busCode.toUpperCase()}}</td>
+					<td ng-click="selectBus(this.one.busCode)">{{one.busCode.toUpperCase()}}</td>
 					<td ng-click="selectStop(this.one.stopName)">{{one.stopName}}</td>
 					<td>{{one.strDepartTime}}</td>	
+					<td>{{one.strDayRange.toUpperCase()}}</td>
 					<td ng-show="impendingDeparture({{this.one.departTime}})">Leaving shortly!</td>	
 				</tr>
 			</tbody>

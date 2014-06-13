@@ -49,10 +49,15 @@ angular.module('root', ['schedules', 'ui.select2'])
 
 			stopTime = $interval( function() {
 				$scope.now = moment();
-				$scope.ones = departTimeFilter($scope.now)($scope.fullTimetable);
+				if ($scope.showFullTimetable) {
+					$scope.ones = $scope.fullTimetable;
+				} else {
+					$scope.ones = departTimeFilter($scope.now)($scope.fullTimetable);
+				}
 			}, 1000);
 
 			$scope.impendingDeparture = function(departTime) {
+				if ($scope.showFullTimetable) return false;
 				return departTime - ($scope.now.hours()*60 + $scope.now.minutes()) < 6;
 			}
 
