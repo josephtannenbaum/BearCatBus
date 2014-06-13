@@ -4,6 +4,8 @@ angular.module('root', ['schedules', 'ui.select2'])
 }])
 	.controller('timetable', ['$scope', '$interval', '$http', 'aliasesParser', 'scheduleParser', 'departTimeFilter',
 		function($scope, $interval, $http, aliasesParser, scheduleParser, departTimeFilter) {
+			
+
 			$scope.selectBus = function(bus) {
 				$scope.selectedBus = bus;
 			}
@@ -51,9 +53,14 @@ angular.module('root', ['schedules', 'ui.select2'])
 			}, 1000);
 
 			$scope.impendingDeparture = function(departTime) {
-				//console.log(($scope.now.hours()*60 + $scope.now.minutes()) - departTime);
 				return departTime - ($scope.now.hours()*60 + $scope.now.minutes()) < 6;
 			}
+
+			resetSaveButton = function() {
+				$("#saveDefault").text("Save as default")
+			}
+			$scope.$watch('selectedBus', resetSaveButton);
+			$scope.$watch('selectedLoc', resetSaveButton);
 }]);
 
 
