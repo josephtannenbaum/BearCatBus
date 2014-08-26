@@ -1,0 +1,165 @@
+{
+  "University Union": {
+    "m-u": {
+      "ws-out": [
+        "9-23 0:40"
+      ],
+      "rr-tsm": [
+        "9-23 0:30"
+      ],
+      "res": [
+        "9:15-23:15 0:30"
+      ],
+      "oak": [
+        "9:30-23 0:30"
+      ],
+      "dcr-out": [
+        "9:20-23:20 0:40"
+      ]
+    }
+  },
+  "Old Dickinson": {
+    "m-u": {
+      "up": [
+        "10-23 0:30"
+      ]
+    }
+  },
+  "Floral & Main": {
+    "m-u": {
+      "ws-out": [
+        "+0:10 University Union"
+      ],
+      "ws-in": [
+        "+0:10 Downtown Center"
+      ]
+    }
+  },
+  "Main & Murray": {
+    "m-u": {
+      "ws-out": [
+        "+0:15 University Union"
+      ],
+      "ws-in": [
+        "+0:03 Downtown Center"
+      ]
+    }
+  },
+  "Downtown Center": {
+    "m-u": {
+      "ws-in": [
+        "9:35-22:55 0:40"
+      ],
+      "dcr-in": [
+        "9:25-23:25 0:40"
+      ]
+    }
+  },
+  "Riverside & Columbus": {
+    "m-u": {
+      "dcr-out": [
+        "+0:06 University Union"
+      ],
+      "dcr-in": [
+        "+0:09 Downtown Center"
+      ]
+    }
+  },
+  "Riverside & Murray": {
+    "m-u": {
+      "dcr-out": [
+        "+0:11 University Union"
+      ],
+      "dcr-in": [
+        "+0:03 Downtown Center"
+      ]
+    }
+  },
+  "Academic A": {
+    "m-u": {
+      "ws-in": [
+        "+0:23 Downtown Center"
+      ],
+      "dcr-in": [
+        "+0:13 Downtown Center"
+      ]
+    }
+  },
+  "Susquehanna": {
+    "m-u": {
+      "res": [
+        "+0:03 University Union"
+      ]
+    }
+  },
+  "Hillside": {
+    "m-u": {
+      "res": [
+        "+0:05 University Union"
+      ]
+    }
+  },
+  "Mountainview": {
+    "m-u": {
+      "res": [
+        "+0:08 University Union"
+      ]
+    }
+  },
+  "Riviera Ridge": {
+    "m-u": {
+      "rr-tsm": [
+        "+0:07 University Union"
+      ]
+    }
+  },
+  "Parkway Plaza": {
+    "m-u": {
+      "rr-tsm": [
+        "+0:10 University Union"
+      ]
+    }
+  },
+  "Walmart (TSM)": {
+    "m-u": {
+      "rr-tsm": [
+        "+0:15 University Union"
+      ]
+    }
+  },
+  "University Plaza": {
+    "m-u": {
+      "up": [
+        "+0:05 Old Dickinson"
+      ]
+    }
+  },
+  "Hayes & Meadows": {
+    "m-u": {
+      "up": [
+        "+0:07 Old Dickinson"
+      ]
+    }
+  },
+  "Washington Dr": {
+    "m-u": {
+      "up": [
+        "+0:09 Old Dickinson"
+      ]
+    }
+  },
+  "Oakdale Mall": {
+    "m-u": {
+      "oak": [
+        "+0:10 University Union"
+      ]
+    }
+  },
+  "Wegmans": {
+    "m-u": {
+      "oak": [
+        "+0:15 University Union"
+      ]
+    }
+  }
+}

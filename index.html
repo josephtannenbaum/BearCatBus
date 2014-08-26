@@ -7,7 +7,8 @@
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
     <meta property="og:title" content="BearCatBus: realtime SUNY Binghamton bus schedule" />
     <meta property="og:description" content="by Joe Tannenbaum" />
-    <meta property="og:image" content="//tannenbau.me/bcb/preview.png" />
+    <meta property="og:image" content="http://tannenbau.me/bcb/preview.png" />
+    <meta property="og:url"  content="http://tannenbau.me/bcb/" />
 
 	<link href="index.css" rel="stylesheet"/>
 
@@ -20,73 +21,102 @@
     <link href="lib/select2-3.4.8/select2.css" rel="stylesheet"/>
 	<script src="lib/select2-3.4.8/select2.js"></script>
 	<script src="lib/angular-ui/select2.js"></script>
+	<script src="data/maps/iframes.js"></script>
 	<script src="schedules.js"></script>
 	<script src="root.js"></script>
 </head>
-
 <body>
+
 <p><b style="font-size:25px">BearCatBus</b> a realtime bus schedule for Binghamton University students </p>
 <div ng-controller="timetable">
 	<p>
 		<span class="timedisplay">
 			It's now: {{now.format("dddd, MMMM Do, h:mm:ss a")}}
 		</span>
-		<span class="aboutButton">
-			<button class="button" id="aboutButton" href="#aboutWindow">
+		<span class="btn-container">
+			<button class="btn" id="aboutButton" href="#aboutWindow">
 				About
 			</button>
 		</span>
+		<button class="btn" id="bookmarkButton" ng-init="showBookmark=false" ng-click="showBookmark=!showBookmark">
+			{{showBookmark ? "Drag to your bookmarks bar -->" : "Bookmark this page"}}
+		</button>
+		<span class="bookmark">
+			<a href="http://tannenbau.me/bcb" ng-show="showBookmark">BearCatBus</a>
+		</span>
 	</p>
 	<p>	
-		<span class="selectedLocContainer">
-			<select ui-select2 ng-model="t.selectedLoc" data-placeholder="Where are you?" style="width:250px" >
-				<option value=""></option>
-				<option ng-repeat="stopName in stopNames" value="{{stopName}}">{{stopName}}</option>
+		<span class="select-container">
+			<!-- <select ui-select2 ng-model="t.selectedLoc" data-placeholder="Where are you?" style="width:250px" 
+			ng-options="stopName as stopName group by stopGroupings[stopName] for stopName in stopNames" > -->
+			<select ui-select2 ng-model="t.selectedLoc" data-placeholder="Where are you?" style="width:250px">
+				<option></option>
+				<option ng-repeat="stopName in stopNames" value="{{stopName}}">{{stopName}}	</option>
 			</select>
 		</span>
-		<span class="selectedBusContainer">
-			<select ui-select2 ng-model="t.selectedBus" data-placeholder="Filter by bus" style="width:250px" > 
+		
+		<span class="select-container">
+			<select ui-select2 ng-model="t.selectedBus" data-placeholder="Filter by bus" style="width:250px"> 
 				<option value=""></option>
 				<option ng-repeat="alias in aliases" value="{{alias.busCode.toLowerCase()}}">{{alias.busCode}} - {{alias.fullname}}</option>
 			</select>
 		</span>
-		<span class="saveDefaultButton">
-			<button ng-click="saveDefault()" class="button" id="saveDefault">
+		
+		<span class="btn-container">
+			<button ng-click="saveDefault()" class="btn" id="saveDefault">
 				Save as default
 			</button>
 		</span>
-		<span>
-		<input type="checkbox" ng-model="showFullTimetable">Show full schedule</input>
-		</span>
 	</p>
-	<div>
-		<p>{{msg.s}}</p>
-		<table class="timetable">
-			<thead>
-				<tr>
-					<td>Bus</td>
-					<td>Leaving from</td>
-					<td>Departing at</td>
-					<td>Applicable days</td>
-				</tr>
-			</thead>
-			<tbody>
-				<tr class="departure" ng-repeat="one in ones | oneFilter:t.selectedLoc:t.selectedBus:msg">
-					<td ng-click="this.t.selectedBus = this.one.busCode">{{one.busCode.toUpperCase()}}</td>
-					<td ng-click="this.t.selectedLoc = this.one.stopName">{{one.stopName}}</td>
-					<td>{{one.strDepartTime}} ({{fromNow(one.strDepartTime)}})</td>	
-					<td>{{one.strDayRange.toUpperCase()}}</td>
-					<td ng-show="impendingDeparture({{this.one.departTime}})">Leaving shortly!</td>	
-				</tr>
-			</tbody>
-		</table>
+
+
+
+
+
+	<div class="main-content-box">
+	<p><b>CURRENT SCHEDULE: <u><a href="http://occtransport.org/index.php/schedule?download=104%3Awbw-spring-2014-schedule">Welcome Back Weekend (NOT IN EFFECT YET)</a></u> Effective 8/29 - 9/1. The ITC van is also running during that time.</b></p>
+		<div class="timetable-box">
+		{{msg.s}}
+			<table class="timetable">
+				<thead>
+					<tr class="tt__header">
+						<td>Bus</td>
+						<td>Leaving from</td>
+						<td>Arriving/departing at</td>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr class="departure" ng-repeat="one in ones | oneFilter:t.selectedLoc:t.selectedBus:msg">
+						<td title="Click to view only {{one.busCode.toUpperCase()}} departures" ng-click="this.t.selectedBus = this.one.busCode"><p class="text-bubble" ng-style="busCodeStyle(one.busCode)">{{one.busCode.toUpperCase()}}</p></td>
+						<td class="hover-highlight" title="Click to view only {{one.stopName}} departures" ng-click="this.t.selectedLoc = this.one.stopName">	{{one.stopName}}</td>
+						<td>{{one.strDepartTime}} ({{fromNow(one.strDepartTime)}})</td>	
+						<td ng-show="impendingDeparture({{this.one.departTime}})">Leaving shortly!</td>	
+					</tr>	
+				</tbody>
+			</table>
+		</div>
+
+
+
+
+
+		<div class="route-map-box" ng-show="showRouteMap">
+			<div id="routeMap">Select a route to show the map!</div>
+		</div>
 	</div>
 </div>
+
+
+
+
+
 <div id="aboutWindow">
-	<p>A webapp by <a href="http://tannenbau.me">Joe Tannenbaum</a></p>
-	<p>Open source on <a href="https://github.com/josephtannenbaum/BearCatBus">GitHub</a></p>
+	<p>A webapp by <a target="_blank" href="http://tannenbau.me">Joe Tannenbaum</a></p>
+	<p>Open source on <a target="_blank" href="https://github.com/josephtannenbaum/BearCatBus" >GitHub</a></p>
 	<p>Send bug reports to joseph.i.tannenbaum gmail</p>
 	<p>NOTE: The creator does not guarantee the accuracy of the information on this website. This website is not associated with OCC Transport.</p>
+	<p>This website does not collect any data entered by users. The "Save as Default" feature sends no information over the internet, but rather saves your settings in your own browser.</p>
 </div>
 
 </body>

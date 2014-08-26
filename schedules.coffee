@@ -1,5 +1,9 @@
 # functional helper functions
 flatten = (a) -> [].concat a...
+window.invertObj = (obj) -> 
+	b = {}
+	((b[i] = k for i in obj[k]) for k in Object.keys(obj))
+	b
 
 # string/array maipulation helper functions
 strcmpl = (a, b) -> a.toLowerCase() == b.toLowerCase()
@@ -10,8 +14,8 @@ militaryToMinutes = (s) ->
 	[aH, aM] = (parseInt(n, 10) for n in s.split(':'))
 	return aH*60 + (if aM then aM else 0)
 momentToMinutes = (m) -> m.hours()*60 + m.minutes()
-minutesToTraditional = (n) -> moment('00:00','HH:mm').add(n,'m').format("h:mm A")
-dayrangeToRecur = (s) ->
+minutesToTraditional = (n) -> moment('00:00','HH:mm').add(n,'m').format('h:mm A')
+dayrangeToRecur = (s) ->	# gives us a moment.recur object based on a string such as 'm-f'
 	days = ['m','t','w','r','f','s','u']
 	daysFull = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 	[a, b] = s.split('-')
@@ -54,8 +58,8 @@ scheduleParserPass = (data, baseSchedule) -> flatten(flatten(flatten(flatten( fo
 
 scheduleParser = (data) ->
 	ret = scheduleParserPass(data, null) # first pass for uncondensed base schedule
-	ret.concat(scheduleParserPass(data, ret))
-	   .sort((a, b) -> a.departTime - b.departTime) # second pass for remaining condensed schedule
+	ret.concat(scheduleParserPass(data, ret)) # second pass for remaining condensed schedule
+	   .sort((a, b) -> a.departTime - b.departTime) # sort from earliest to latest
 	   
 
 # ex: {code: 'WS', fullname: 'Westside Shuttle'}
@@ -72,12 +76,12 @@ onesFilter = (ones=[], selectedLoc, selectedBus, msg) ->
 		byLoc = (if selectedLoc then stopNameFilter(selectedLoc) else id)
 		byBus = (if selectedBus then busCodeFilter(selectedBus) else id)
 		ret = byLoc(byBus(ones))
-		msg.s = if ret.length == 0 then 'Nothing found!' else ''
+		msg.s = if ret.length == 0 then 'Nothing found!' else 'Showing '+(ret[..25].length)+' results (max 26):'
 		ret[..25]	
 	else ones
 
-angular.module("schedules",[])
-	.value("aliasesParser", aliasesParser)
-	.value("scheduleParser", scheduleParser)
-	.value("departTimeFilter", departTimeFilter)
+angular.module('schedules',[])
+	.value('aliasesParser', aliasesParser)
+	.value('scheduleParser', scheduleParser)
+	.value('departTimeFilter', departTimeFilter)
 	.filter('oneFilter', () -> onesFilter)

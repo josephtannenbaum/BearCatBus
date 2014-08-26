@@ -1,0 +1,29 @@
+{
+    "aliases" : {
+        "WS-IN": "Westside Inbound",
+        "WS-OUT": "Westside Outbound",
+        "DCR-IN": "DCR Inbound",
+        "DCR-OUT": "DCR Outbound",
+        "RES": "Residential Shuttle",
+        "RR-TSM": "Riviera Ridge/Town Square Mall",
+        "OAK": "Oakdale Mall Shuttle",
+        "UP": "University Plaza Shuttle"
+    },
+    "groupings" : {
+        "On Campus" : ["University Union", "Old Dickinson", "Susquehanna", "Hillside", "Mountainview", "Academic A"],
+        "Main St/Riverside Dr" : ["Floral & Main", "Main & Murray", "Riverside & Columbus", "Riverside & Murray"],
+        "Downtown" : ["Downtown Center", "Leroy & Murray" ],
+        "Near Campus" : ["University Plaza", "Riviera Ridge", "Parkway Plaza", "Walmart (TSM)"],
+        "Elsewhere" : ["Oakdale Mall", "Wegmans"]
+    },
+    "route_colors" : {
+        "WS-IN": "#377eb8",
+        "WS-OUT": "#377eb8",
+        "DCR-IN": "#4daf4a",
+        "DCR-OUT": "#4daf4a",
+        "RES": "#ff7f00",
+        "RR-TSM": "#984ea3",
+        "OAK": "#a65628",
+        "UP": "#ff7f00"
+    }
+}
